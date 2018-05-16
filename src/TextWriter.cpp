@@ -184,7 +184,7 @@ void TextWriter::begin()
 
 	glBindVertexArray(m_vao);
 
-	/* Use the texture containing the atlas */
+	// Use the texture containing the atlas
 	glBindTexture(GL_TEXTURE_2D, m_atlas->tex);
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
@@ -212,20 +212,20 @@ void TextWriter::write(const char *text, float x, float y, float sx, float sy, c
 	point coords[6 * strlen(text)];
 	int c = 0;
 
-	/* Loop through all characters */
+	// Loop through all characters
 	for (p = (const uint8_t *) text; *p; p++)
 	{
-		/* Calculate the vertex and texture coordinates */
+		// Calculate the vertex and texture coordinates
 		float x2 = x + m_atlas->c[*p].bl * sx;
 		float y2 = -y - m_atlas->c[*p].bt * sy;
 		float w = m_atlas->c[*p].bw * sx;
 		float h = m_atlas->c[*p].bh * sy;
 
-		/* Advance the cursor to the start of the next character */
+		// Advance the cursor to the start of the next character
 		x += m_atlas->c[*p].ax * sx;
 		y += m_atlas->c[*p].ay * sy;
 
-		/* Skip glyphs that have no pixels */
+		// Skip glyphs that have no pixels
 		if (!w || !h)
 			continue;
 
@@ -237,7 +237,7 @@ void TextWriter::write(const char *text, float x, float y, float sx, float sy, c
 		coords[c++] = (point) { x2 + w, -y2 - h, m_atlas->c[*p].tx + m_atlas->c[*p].bw / m_atlas->w, m_atlas->c[*p].ty + m_atlas->c[*p].bh / m_atlas->h };
 	}
 
-	/* Draw all the character on the screen in one go */
+	// Draw all the character on the screen in one go
 	glBufferData(GL_ARRAY_BUFFER, sizeof(coords), coords, GL_DYNAMIC_DRAW);
 	glDrawArrays(GL_TRIANGLES, 0, c);
 }

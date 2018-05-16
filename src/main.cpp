@@ -11,14 +11,15 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
-#include <iostream>
+#include <stdio.h>
+#include <unistd.h>
 
 #define VERTEX_SHADER_PATH    "../shaders/vertex.glsl"
 #define FRAGMENT_SHADER_PATH  "../shaders/fragment.glsl"
 
 #define WINDOW_WIDTH    800
 #define WINDOW_HEIGHT   600
-#define WINDOW_TITLE    "ECE6122 Final Project"
+#define WINDOW_TITLE    "Simulations"
 
 static float fov = 45.0f; // Filed of View in degrees
 static float camx = 0.01f; // Camera location x
@@ -117,9 +118,12 @@ int main(int argc, char **argv)
 	cfg_clear(&cfg);
 	argparser(argc, argv, &cfg);
 	verbose = cfg.verbose;
+
 	std::vector<SceneObject> *objptr;
 
-	std::srand(std::time(0));
+	chdir(cfg.working_dir);
+
+	srand(time(0));
 
 	if (cfg.verbose)
 	{
@@ -190,20 +194,20 @@ int main(int argc, char **argv)
 				{
 					float multiplier;
 
-					multiplier = (std::rand() % 2 == 1) ? -1 : 1;
-					(*objptr)[i].velocity.x = std::rand() % 4 * multiplier;
+					multiplier = (rand() % 2 == 1) ? -1 : 1;
+					(*objptr)[i].velocity.x = rand() % 4 * multiplier;
 
-					multiplier = (std::rand() % 2 == 1) ? -1 : 1;
-					(*objptr)[i].velocity.z = std::rand() % 4 * multiplier;
+					multiplier = (rand() % 2 == 1) ? -1 : 1;
+					(*objptr)[i].velocity.z = rand() % 4 * multiplier;
 
-					multiplier = (std::rand() % 2 == 1) ? -1 : 1;
-					(*objptr)[i].position.x = std::rand() % 4 * multiplier;
+					multiplier = (rand() % 2 == 1) ? -1 : 1;
+					(*objptr)[i].position.x = rand() % 4 * multiplier;
 
 					// No multiplier, always start above ground
-					(*objptr)[i].position.y = std::rand() % 40;
+					(*objptr)[i].position.y = rand() % 40;
 
-					multiplier = (std::rand() % 2 == 1) ? -1 : 1;
-					(*objptr)[i].position.z = std::rand() % 4 * multiplier;
+					multiplier = (rand() % 2 == 1) ? -1 : 1;
+					(*objptr)[i].position.z = rand() % 4 * multiplier;
 				}
 				engine.addSphere(
 					1.0f,

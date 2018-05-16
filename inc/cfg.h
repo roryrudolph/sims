@@ -7,6 +7,7 @@ extern "C"
 #endif
 
 
+#define DEFAULT_DIRECTORY       "."
 #define DEFAULT_MOVIE_FILENAME  "movie.mpeg"
 #define DEFAULT_SCENE           1
 #define DEFAULT_NUM_THREADS     1
@@ -19,6 +20,7 @@ extern "C"
  */
 typedef struct cfg
 {
+	char working_dir[128];
 	char movie_filename[128];
 	int raytrace;
 	unsigned int scene;

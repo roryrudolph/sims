@@ -32,6 +32,7 @@ static void argparser(int argc, char **argv, cfg_t *cfg)
 	{
 		static struct option long_opts[] =
 		{
+			{ "dir", required_argument, 0, 'd' },
 			{ "frames", required_argument, 0, 'f' },
 			{ "raytrace", no_argument, &cfg->raytrace, 'r' },
 			{ "scene", required_argument, 0, 's' },
@@ -43,13 +44,16 @@ static void argparser(int argc, char **argv, cfg_t *cfg)
 
 		int i = 0;
 
-		c = getopt_long(argc, argv, "f:rs:t:v?", long_opts, &i);
+		c = getopt_long(argc, argv, "d:f:rs:t:v?", long_opts, &i);
 
 		if (c == -1)
 			break;
 
 		switch (c)
 		{
+			case 'd': // Relative working directory
+				snprintf(cfg->working_dir, sizeof(cfg->working_dir)-1, "%s", optarg);
+				break;
 			case 'f': // Simulation time in seconds
 				cfg->frames = strtoul(optarg, NULL, 10);
 				break;
@@ -73,6 +77,7 @@ static void argparser(int argc, char **argv, cfg_t *cfg)
 Usage: %s [OPTIONS...]\n\
 \n\
 Options\n\
+  -d, --directory <DIR>     Relative working directory\n\
   -f, --frames <NUM>        Total number of frames to simulate\n\
                             Default=unlimited for scene 1\n\
                             Default=300 for scene 2 (raytracing)\n\

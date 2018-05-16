@@ -7,6 +7,8 @@ void cfg_clear(cfg_t *cfg)
 	if (cfg == NULL)
 		return;
 
+	memset(cfg->working_dir, 0, sizeof(cfg->working_dir));
+	snprintf(cfg->working_dir, sizeof(cfg->working_dir)-1, "%s", DEFAULT_DIRECTORY);
 	memset(cfg->movie_filename, 0, sizeof(cfg->movie_filename));
 	snprintf(cfg->movie_filename, sizeof(cfg->movie_filename)-1, "%s", DEFAULT_MOVIE_FILENAME);
 	cfg->raytrace = 0;
