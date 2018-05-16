@@ -1,5 +1,5 @@
-#ifndef MESHLOADER_H
-#define MESHLOADER_H
+#ifndef OBJECTLOADER_H
+#define OBJECTLOADER_H
 
 
 #include "Object.h"
@@ -16,4 +16,4 @@ private:
 };
 
 
-#endif //MESHLOADER_H
+#endif //OBJECTLOADER_H

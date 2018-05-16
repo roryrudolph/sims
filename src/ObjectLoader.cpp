@@ -21,8 +21,8 @@ ObjectLoader::ObjectLoader() { }
 
 /**
  * TODO
- * @param filepath TODO
- * @return TODO
+ * @param filepath The file path of the *.obj file
+ * @param object The object that will be returned after loading
  */
 void ObjectLoader::loadFromFile(const char *filepath, Object *object)
 {
@@ -44,11 +44,10 @@ void ObjectLoader::loadFromFile(const char *filepath, Object *object)
 	f.close();
 
 	// Load the meshes from the file into the aiScene
-//	scene = importer.ReadFile(filepath, aiProcessPreset_TargetRealtime_Quality);
 	scene = importer.ReadFile(filepath,
 		aiProcess_Triangulate |
-//		aiProcessPreset_TargetRealtime_Quality |
-//		aiProcess_FlipUVs |
+		//aiProcessPreset_TargetRealtime_Quality |
+		//aiProcess_FlipUVs |
 		aiProcess_FixInfacingNormals |
 		aiProcess_GenUVCoords
 	);
@@ -69,7 +68,7 @@ void ObjectLoader::loadFromFile(const char *filepath, Object *object)
 /**
  * TODO
  * @param scene TODO
- * @return TODO
+ * @param object TODO
  */
 void createMeshesFromAiScene(const aiScene *scene, Object *object)
 {
@@ -167,8 +166,9 @@ void createMeshesFromAiScene(const aiScene *scene, Object *object)
 }
 
 /**
- * Create material objects from an aiScene
+ * Create materials from an aiScene
  * @param scene The aiScene containing the materials
+ * @param object The object to store the materials in
  */
 void createMaterialsFromAiScene(const aiScene *scene, Object *object)
 {
