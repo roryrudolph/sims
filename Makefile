@@ -3,7 +3,7 @@ CXX := g++
 
 BIN_DIR := bin
 SRC_DIR := src
-INC_DIR := src
+INC_DIR := inc
 OBJ_DIR := obj
 
 BINS := $(BIN_DIR)/walkabout
@@ -13,7 +13,7 @@ INCS := $(shell find $(INC_DIR) -type f -iname "*.h")
 OBJS_C := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS_C))
 OBJS_CPP := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS_CPP))
 
-CFLAGS := -Wall -Wextra -Werror \
+CFLAGS := -Wall -Wextra \
 	`pkg-config --cflags bullet` \
 	`pkg-config --cflags freetype2`
 IFLAGS := -I$(INC_DIR)/

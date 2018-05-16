@@ -362,7 +362,7 @@ int main(int argc, char **argv)
 
 	if (cfg.raytrace)
 	{
-		char command[80];
+		char command[256];
 		memset(command, 0, sizeof(command));
 		snprintf(command, sizeof(command)-1, "ffmpeg -y -framerate 60 -i image%%04d.ppm %s", cfg.movie_filename);
 		if (system(command))
