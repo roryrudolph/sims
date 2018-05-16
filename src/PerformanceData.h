@@ -1,0 +1,43 @@
+#ifndef PERFORMANCEDATA_H
+#define PERFORMANCEDATA_H
+
+
+#include <ctime>
+#include <cstdio>
+
+class PerformanceData
+{
+public:
+	PerformanceData();
+
+	void incrementFrames();
+	const unsigned int &getFramesCurrent() const;
+	const unsigned int &getFramesTotal() const;
+
+	void updateStats();
+
+	void reset();
+	double getElapsedTime();
+	double getElapsedTimeSinceCreation();
+
+	const char *getFramesStr() const;
+	const char *getElapsedStr() const;
+	const char *getFpsStr() const;
+
+private:
+	inline struct timespec getTimespec();
+	inline double getTimeDouble();
+	inline double convertTimespecToDouble(struct timespec &time);
+
+	unsigned int m_framesCurrent;
+	unsigned int m_framesTotal;
+	char m_strFrames[32];
+	char m_strElapsed[32];
+	char m_strFps[32];
+	struct timespec m_timeCreated;
+	struct timespec m_timeStart;
+	struct timespec m_timeNow;
+};
+
+
+#endif //PERFORMANCEDATA_H
